@@ -9,10 +9,12 @@ class GreetingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Scaffold is the main structure for the screen layout
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
         children: [
+          // Background gradient for the screen
           Container(
             width: double.infinity,
             height: double.infinity,
@@ -24,10 +26,12 @@ class GreetingsScreen extends StatelessWidget {
               ),
             ),
           ),
+          // Column to vertically align the content
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // Welcome text with a shadow effect
               Text(
                 'Welcome to Flutter Delights!',
                 style: TextStyle(
@@ -44,14 +48,15 @@ class GreetingsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
+              // Image from Internet
               Image.network(
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPTPM5pMeLTDHivJQe8NeE7fAf64Z_ybNHrw&usqp=CAU',
                 height: Get.height * 0.5,
               ),
               const SizedBox(height: 20),
+              // Button to navigate to the HomeScreen
               ElevatedButton(
                 onPressed: () {
-                  // Get.toNamed(HomeScreen.id);
                   Navigator.of(context).pushNamed(HomeScreen.id);
                 },
                 style: ElevatedButton.styleFrom(

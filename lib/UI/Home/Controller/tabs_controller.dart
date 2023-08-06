@@ -5,23 +5,30 @@ import 'package:flutter_assignment_4/UI/Home/Tabs/to_do_tab.dart';
 import 'package:get/get.dart';
 
 class TabsController extends GetxController {
-  RxInt index = 0.obs;
-  List<Widget> tabs = [const ToDoTab(), BMITab()];
+  RxInt index = 0.obs; // Reactive variable to hold the current tab index
+  List<Widget> tabs = [
+    const ToDoTab(),
+    BMITab()
+  ]; // List of tabs (ToDoTab and BMITab)
 
+  // Method to get the app title based on the selected tab index
   String get appTitle => index.value == 0 ? 'To-Do List' : 'BMI Calculator';
 
+  // Method to return the floating action button based on the selected tab
   Widget? floatingButton(ToDoController toDoController, BuildContext context) =>
       index.value == 0
           ? FloatingActionButton(
-              backgroundColor: Colors.deepPurple,
+              backgroundColor: Colors.deepPurple, // Set button background color
               onPressed: () {
-                toDoController.add(context);
+                toDoController
+                    .add(context); // Trigger the add method in ToDoController
               },
-              child: const Icon(Icons.add),
+              child: const Icon(Icons.add), // Button icon
             )
-          : null;
+          : null; // Return null for the BMI tab
 
+  // Method to handle page changes when tapping on a tab
   void onPageChange(int page) {
-    index.value = page;
+    index.value = page; // Update the index to the selected tab index
   }
 }

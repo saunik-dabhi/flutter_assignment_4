@@ -12,49 +12,59 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Ensures content is placed inside the safe area on screen
     return SafeArea(
+      // GetBuilder widget listens for changes in TabsController to rebuild UI
       child: GetBuilder<TabsController>(
-          init: Get.put(TabsController()),
-          builder: (controller) {
-            return Scaffold(
-              appBar: AppBar(
-                title: Text(controller.appTitle),
-                centerTitle: true,
-                backgroundColor: Colors.deepPurple,
-                actions: [
-                  IconButton(
-                    onPressed: () {
-                      Get.toNamed(AboutScreen.id);
-                    },
-                    icon: const Icon(Icons.info),
-                  )
-                ],
-              ),
-              body: controller.tabs.elementAt(controller.index.value),
-              floatingActionButton:
-                  controller.floatingButton(toDoController, context),
-              bottomNavigationBar: BottomNavigationBar(
-                backgroundColor: Colors.deepPurple,
-                currentIndex: controller.index.value,
-                selectedItemColor: Colors.white,
-                unselectedItemColor: Colors.white.withOpacity(0.7),
-                onTap: (index) {
-                  controller.onPageChange(index);
-                  controller.update();
-                },
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.list),
-                    label: 'To-Do',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.fitness_center),
-                    label: 'BMI',
-                  ),
-                ],
-              ),
-            );
-          }),
+        init: Get.put(TabsController()), // Initialize TabsController
+        builder: (controller) {
+          // Main scaffold for the home screen layout
+          return Scaffold(
+            appBar: AppBar(
+              // App bar with the app title and info icon
+              title: Text(controller.appTitle),
+              centerTitle: true,
+              backgroundColor: Colors.deepPurple,
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    Get.toNamed(AboutScreen.id);
+                  },
+                  icon: const Icon(Icons.info),
+                )
+              ],
+            ),
+            // Body section that displays the current tab content
+            body: controller.tabs.elementAt(controller.index.value),
+            // Floating action button configured by the controller
+            floatingActionButton:
+                controller.floatingButton(toDoController, context),
+            bottomNavigationBar: BottomNavigationBar(
+              // Bottom navigation bar with two tabs
+              backgroundColor: Colors.deepPurple,
+              currentIndex: controller.index.value,
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.white.withOpacity(0.7),
+              // Handles navigation when tapping on a tab
+              onTap: (index) {
+                controller.onPageChange(index);
+                controller.update();
+              },
+              // Defines the tabs and their labels
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.list),
+                  label: 'To-Do',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.fitness_center),
+                  label: 'BMI',
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
